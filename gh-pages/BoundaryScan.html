@@ -70,10 +70,22 @@
   </div>
 
   <div id="section">
-     <h2>Conclusion</h2>
+     <h2>Boundary Scan Architecture</h2>
      <p>
-        
+        The JTAG standard defines both mandatory and optional instructions for interfacing with the boundary-scan layer.  The following boundary-scan instructions are required for every JTAG / TAP implementation.
      </p>
+     <ul>
+        <li><b>EXTEST</b> </li>
+        <li><b>SAMPLE/PRELOAD</b> </li>
+        <li><b>BYPASS</b> </li>
+     </ul>
+     <p>
+        JTAG also defines several optional instructions.  These instructions can be supported by the chip manufacturer to extend the functionality of the standard boundary-scan architecture.  The follwoing optional instructions exist:
+     </p>
+     <ul>
+        <li><b>HIGHZ</b> </li>
+        <li><b>CLAMP</b> </li>
+     </ul>
   </div>
 
   <div id="footer">
