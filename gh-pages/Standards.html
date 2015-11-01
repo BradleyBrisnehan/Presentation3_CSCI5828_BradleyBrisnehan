@@ -72,7 +72,22 @@
   <div id="section">
      <h2>Defining Standards</h2>
      <p>
-        
+        The JTAG standard was originally released under IEEE 1149.1 in 1990.  Since then, six updated standards have further defined what is possible under JTAG boundary-scan designs.  The following standards exist at this time:
+     </p>
+     <ul>
+        <li><b>IEEE 1149.1</b> <i>(Short Name: dot1, Year: 1990)</i> These original standard which has been revised twice.  This standard defines the Test Access Port, the sequential state machine TAP controller, and Instruction and Data Registers.  Revision b further defines Boundary-Scan Descriptive Language (BSDL) and the logic implementation at the chip-level.</li>
+        <li><b>IEEE 1149.4</b> <i>(Short Name: dot4, Year: 2000)</i> This standard extends digital test capability under dot1 to include analog test ports.  This adds two additional ports (analog drive AT1 and analog sense AT2) collectively referred to as the Analog Test Access Port (ATAP).  This port is controlled by an Analog Boundary Module much like the Digital Boundary Module (Boundary Scan Module cell) defined prior.</li>
+        <li><b>IEEE 1149.6</b> <i>(Short Name: ac-EXTEST, Year: 2003)</i> The system defined under the dot1 standard is not robust with respect to LVDS (Low Voltage, Differential Signaling using for serial, differential communications) and capacitively-coupled networks.  The introduction of dot6-compliant devices at the transmitting and receiving ends avoid false passes of these networks.</li>
+        <li><b>IEEE 1149.7</b> <i>(Short Name: dot7/cJTAG, Year: 2010)</i> This standard adds power management for test circuitry, improved data rates, and the ability to access cores within SOCs (system on Chips), among others.  One of the prominant changes under this standard is the reduction of the TAP external pin count to two (TCK and TMS for clock and tranmsission lines).</li>
+        <li><b>IEEE 1532</b> <i>(Short Name: ---, Year: 2000)</i> While Programmable Logic Devices (PLDs) and Field Programmable Gate Arrays (FPGAs) had long-since adopted the dot1 standard, this additional release standardizes the the methodologies for programming these devices.</li>
+        <li><b>IEEE 1581</b> <i>(Short Name: SCITT, Year: 2007)</i> This standard defines the use of logic gates external to the IC to offer test functionality.  This can be used for low-cost, complex memory ICs without where additional test pins are not feasible.</li>
+     </ul>
+     <p>
+        For clarity moving forward; JTAG will refer to the standards defining the system, TAP will refer to the phyiscal pins connecting the internal logic to the external control, and the boundary-scan architecture will refer to the cells and instructions resident between the IC internal logic and the TAP.  A diagram of this concept is provided below:
+     </p>
+     <img src="..\images\Standards.png" alt="Standards">
+     <p>
+        This diagram shows a four-pin implementation of TAP, but the diagram can be easily visualized for the five and two-pin implementations as well.  The JTAG definitions provided in dot1 revision b and dot7/cJTAG will be the primary focus of this article.  The IEEE and JTAG websites should be referenced for more information concerning the other standards.
      </p>
   </div>
 
