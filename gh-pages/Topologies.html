@@ -12,6 +12,13 @@
        color:white
     }
 
+    img
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto
+    }
+
     #header
     {
        font-family: Verdana, "Bitstream Vera Sans", sans-serif;
@@ -72,7 +79,18 @@
   <div id="section">
      <h2>Multi-Chip Topologies</h2>
      <p>
-        
+        To allow access to all Test Access Ports via a single connection and allow testing of all ICs at once, multi-chip topologies are possible.  Under the dot1 standard, four pin connections must be made with each IC.  Under this standard, the mode select and clock can be shared among all ICs.  The original standard does not account for communication collisions on a data bus, therefore all serial output and input lines must be connected to only one other IC.  The following topology is a result of the dot1 standard: 
+     </p>
+     <img src="..\images\dot1Topology.png" alt="dot1 Topology">
+     <p>
+        It can be very easily seen that if a single IC is unresponsive in the chain, all devices following it will not receive test commands.  Until the single-point failure is corrected, no conclusion about the overall design or production build can be made.  In addition, this failure may be mis-construed as a failure in all remianing chips by those with little knowledge of the JTAG topology.
+     </p>
+     <p>
+        The dot7 standard aimed to address the TAP pin coint as well as make mulit-IC testing more robust.  By implementing a two-wire interface (similar to I2C), a star-topology is possible.  The following topology is a result of the dot7 standard:
+     </p>
+     <img src="..\images\dot7Topology.png" alt="dot7 Topology">
+     <p>
+        Under this topology, an number of chips can fail and the remainder of the design can still be tested.  This facilitates easy identification of the failure and reduces the number of design/repair iterations needed to achieve a fully functional design.
      </p>
   </div>
 

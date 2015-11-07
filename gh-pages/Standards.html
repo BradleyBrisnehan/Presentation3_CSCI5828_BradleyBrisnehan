@@ -12,6 +12,13 @@
        color:white
     }
 
+    img
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto
+    }
+
     #header
     {
        font-family: Verdana, "Bitstream Vera Sans", sans-serif;
@@ -83,7 +90,7 @@
         <li><b>IEEE 1581</b> <i>(Short Name: SCITT, Year: 2007)</i> This standard defines the use of logic gates external to the IC to offer test functionality.  This can be used for low-cost, complex memory ICs without where additional test pins are not feasible.</li>
      </ul>
      <p>
-        For clarity moving forward; JTAG will refer to the standards defining the system, TAP will refer to the phyiscal pins connecting the internal logic to the external control, and the boundary-scan architecture will refer to the cells and instructions resident between the IC internal logic and the TAP.  A diagram of this concept is provided below:
+        For clarity moving forward; JTAG will refer to the standards defining the system, TAP will refer to the phyiscal pins connecting the internal logic to the external control, and the boundary-scan architecture will refer to the cells and instructions resident between the IC internal logic and the TAP.  Each pin can support up to three cells - each consistent of a register and a latch.  A diagram of this concept is provided below:
      </p>
      <img src="..\images\Standards.png" alt="Standards">
      <p>

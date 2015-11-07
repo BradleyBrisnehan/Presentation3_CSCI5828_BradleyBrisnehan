@@ -72,20 +72,45 @@
   <div id="section">
      <h2>Boundary Scan Architecture</h2>
      <p>
-        The JTAG standard defines both mandatory and optional instructions for interfacing with the boundary-scan layer.  The following boundary-scan instructions are required for every JTAG / TAP implementation.
+        As part of standardization, the Boundary Scan Description Layer (BSDL) was defined by the Joint Test Action Group.  The modeling language defined is a subset of VHDL and is described under the dot1 standard.  This language standardizes the descriptive syntax by which the device captures, shifts, and updates scanned data.  The BSDL file is comprised of the follwoing parts:
      </p>
      <ul>
-        <li><b>EXTEST</b> </li>
-        <li><b>SAMPLE/PRELOAD</b> </li>
-        <li><b>BYPASS</b> </li>
+        <li><b>Entity Declaration</b> provides the device name.</li>
+        <li><b>Generic Parameters</b> further defines which package on the board is described.</li>
+        <li><b>Logical Port Description</b> defines the physical connections of the device including which pins are input, out, bi-directional, and which pins are boundary-scan linkage bits.</li>
+        <li><b>Package Pin Mapping</b> maps the physical connections to internal internal connections.</li>
+        <li><b>Use Statements</b> connect the VHDL statements to the content mapped in the BSDL file.</li>
+        <li><b>Scan Port Identification</b> identifies the exact physical connections which comprise the TAP (TDI, TDO, etc.).</li>
+        <li><b>TAP Description</b> provides additional information about the TAP connection including the instruction register length, instruction opcodes, device IDCODE, etc.</li>
+        <li><b>Boundary Register Description</b> provides additional information about the layout of the boundary-scan cells on the device.  This will include the number of cells per pin.</li>
      </ul>
      <p>
-        JTAG also defines several optional instructions.  These instructions can be supported by the chip manufacturer to extend the functionality of the standard boundary-scan architecture.  The follwoing optional instructions exist:
+        An example of a BSDL file for the Atmel AVR ATmega microcontroller family is provided <a href="../references/megaAVR_BSDL">here</a>.  These files are plain-text readable in IDEs such as Notepad++ or AtmelStudio (a free IDE powered by Visual Studio for programming Atmel microcontrollers).  An example of the type of text you will find in the BSDL is as follows:
+     </p>
+     <blockquote>
+        <i>entity  ATmega16  is<br>
+           generic (PHYSICAL_PIN_MAP : string := " TQFP    ")              ;<br>
+           port    (<br>
+              &nbspRESET   :       in      bit     ;<br>
+              &nbspVCC     :       linkage bit     ;<br>
+              &nbspGND     :       linkage bit     ;<br>
+              &nbspPA      :       inout   bit_vector(0 to 7)      ;<br>
+           );</i>
+     </blockquote>
+     <p>
+        Based on the content, it is apparent that this excerpt is from the Logical Port Description of the BSDL.  This excerpt identifies the RESET pin as an input, VCC as a linkage, GND as a linkage, and PA (standing for port A) as 8 pins where each pin can be configured as either input or output.
+     </p>
+     <p>
+        Now that we have an understanding of the boundary-scan definition, let's explore the intruction set used to perform testing.  The following boundary-scan instructions are required for every JTAG / TAP implementation.
      </p>
      <ul>
-        <li><b>HIGHZ</b> </li>
-        <li><b>CLAMP</b> </li>
+        <li><b>EXTEST</b> tests the interconnection of JTAG-enabled ICs on the PCB.  This will check for shorts or poor solder joints between among all input and output pins.</li>
+        <li><b>SAMPLE/PRELOAD</b> allows data to be loaded into the boundary-scan register prior to execution of the EXTEST command.  This allows the IC to receivee a sample of the functional data under test.</li>
+        <li><b>BYPASS</b> removes the IC from the test loop - causing all data to pass between the TDI and TDO bits to occur without alteration.</li>
      </ul>
+     <p>
+        Chip designers can also provide optional instructions in an effort to make integration and control of their IC easier during testing, but only the above instructions are required for JTAG implementations.
+     </p>
   </div>
 
   <div id="footer">

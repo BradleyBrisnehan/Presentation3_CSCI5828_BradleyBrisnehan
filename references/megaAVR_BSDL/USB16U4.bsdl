@@ -1,0 +1,282 @@
+------------------------------------------------------------------------	
+-- A T M E L   A V R   M I C R O C O N T R O L L E R S                --	
+------------------------------------------------------------------------	
+-- BSDL file	
+--         	
+-- File Name:    	ATMEGA16U4.BSD
+-- File Revision:	1.0
+-- Date created: 	2009-02-05
+-- Created by:   	Atmel Corporation
+-- Support:      	avr@atmel.com
+-- File Status:  	Released
+--	
+-- Device:       	ATMEGA16U4
+--               	rev A
+-- Package:      	64 pin TQFP (default)
+--               	64 pin QFN
+--               
+--         
+-- Visit http://www.atmel.com for a updated list of BSDL files.
+--         
+--
+------------------------------------------------------------------------
+-- Syntax and Semantics are checked against the IEEE 1149.1 standard. --
+-- The logical functioning of the standard Boundary-Scan instructions --
+-- and of the associated bypass, idcode and boundary-scan register    --
+-- described in this BSDL file has been verified against its related  --
+-- silicon by JTAG Technologies B.V.                                  --
+------------------------------------------------------------------------
+------------------------------------------------------------------------ 
+--                       IMPORTANT NOTICE                             -- 
+--                                                                    -- 
+--   Copyright 2002 Atmel Corporation. All Rights Reserved.           -- 
+--                                                                    -- 
+--   Atmel assumes no responsibility or liability arising out         -- 
+--   this application or use of any information described herein      -- 
+--   except as expressly agreed to in writing by Atmel Corporation.   -- 
+--                                                                    -- 
+------------------------------------------------------------------------ 
+--
+-- Notes:
+-- 1. The behavior of the Oscillator Boundary Scan cells are dependant 
+--    on the Oscillator Fuse settings, and are therefore described as
+--    "internal".
+-- 2. The Boundary Scan cells for controlling the analog features ADC, 
+--    Comparator and pin pull-ups are described as "internal".
+--    Note that this feature is in addition to the (digital) cells on 
+--    each pin. For information on accessing the pull-up function of the 
+--    pins, please read the device data sheet.
+--					
+
+entity	ATMEGA16U4	is			
+
+generic	(PHYSICAL_PIN_MAP : string := "	TQFP	")		;
+
+port	(				
+	RESET	:	in	bit	;
+	VCC  	:	linkage	bit	;
+	VCC1 	:	linkage	bit	;
+	GND  	:	linkage	bit	;
+	GND1 	:	linkage	bit	;
+	GND2 	:	linkage	bit	;
+	XTAL1	:	linkage	bit	;
+	XTAL2	:	linkage	bit	;
+	PB   	:	inout	bit_vector(0 to 7)	;
+	PC	:	inout	bit_vector(6 to 7)	;
+	PD   	:	inout	bit_vector(0 to 7)	;
+	PE2	:	inout	bit	;
+	PE6	:	inout	bit	;
+	PF   	:	inout	bit_vector(0 to 1)	;
+	TCK  	:	in	bit	;
+	TMS  	:	in	bit	;
+	TDO  	:	out	bit	;
+	TDI  	:	in	bit	;
+	VBUS	:	linkage	bit	;
+	UCAP	:	linkage	bit	;
+	UGND	:	linkage	bit	;
+	DP	:	linkage	bit	;
+	DM	:	linkage	bit	;
+	UVCC	:	linkage	bit	;
+	AREF 	:	linkage	bit	;
+	AVCC	:	linkage	bit	;
+	AVCC1	:	linkage	bit	;
+	GND3	:	linkage	bit	
+	);				
+
+use	STD_1149_1_1994.all				;
+
+attribute	COMPONENT_CONFORMANCE of	ATMEGA16U4	: entity is		
+"	STD_1149_1_1993	";			
+
+attribute	PIN_MAP of	ATMEGA16U4	: entity is	PHYSICAL_PIN_MAP	;
+					
+constant	TQFP	:	PIN_MAP_STRING:=		
+"	RESET	:	13	, "	&
+"	VCC  	:	14	, "	&
+"	VCC1 	:	34	, "	&
+"	GND  	:	15	, "	&
+"	GND1 	:	35	, "	&
+"	GND2 	:	43	, "	&
+"	XTAL1	:	17	, "	&
+"	XTAL2	:	16	, "	&
+"	PB   	:	(8,9,10,11,28,29,30,12)	, "	&
+"	PC   	:	(31,32)	, "	&
+"	PD   	:	(18,19,20,21,25,22,26,27)	, "	&
+"	PE2	:	33	, "	&
+"	PE6	:	1	, "	&
+"	PF   	:	(41,40)	, "	&
+"	TCK  	:	39	, "	&
+"	TMS  	:	38	, "	&
+"	TDO  	:	37	, "	&
+"	TDI  	:	36	, "	&
+"	VBUS	:	7	, "	&
+"	UCAP	:	6	, "	&
+"	UGND	:	5	, "	&
+"	DP	:	4	, "	&
+"	DM	:	3	, "	&
+"	UVCC	:	2	, "	&
+"	AREF 	:	42	, "	&
+"	AVCC 	:	44	, "	&
+"	AVCC1	:	24	, "	&
+"	GND3	:	23	"	;
+
+constant	QFN	:	PIN_MAP_STRING:=		
+"	RESET	:	13	, "	&
+"	VCC  	:	14	, "	&
+"	VCC1 	:	34	, "	&
+"	GND  	:	15	, "	&
+"	GND1 	:	35	, "	&
+"	GND2 	:	43	, "	&
+"	XTAL1	:	17	, "	&
+"	XTAL2	:	16	, "	&
+"	PB   	:	(8,9,10,11,28,29,30,12)	, "	&
+"	PC   	:	(31,32)	, "	&
+"	PD   	:	(18,19,20,21,25,22,26,27)	, "	&
+"	PE2	:	33	, "	&
+"	PE6	:	1	, "	&
+"	PF   	:	(41,40)	, "	&
+"	TCK  	:	39	, "	&
+"	TMS  	:	38	, "	&
+"	TDO  	:	37	, "	&
+"	TDI  	:	36	, "	&
+"	VBUS	:	7	, "	&
+"	UCAP	:	6	, "	&
+"	UGND	:	5	, "	&
+"	DP	:	4	, "	&	
+"	DM	:	3	, "	&	
+"	UVCC	:	2	, "	&	
+"	AREF 	:	42	, "	&	
+"	AVCC 	:	44	, "	&	
+"	AVCC1	:	24	, "	&	
+"	GND3	:	23	"	;	
+						
+attribute	TAP_SCAN_IN	of	TDI	: signal is	true	;
+attribute	TAP_SCAN_OUT	of	TDO	: signal is	true	;
+attribute	TAP_SCAN_MODE	of	TMS	: signal is	true	;
+attribute	TAP_SCAN_CLOCK	of	TCK	: signal is	(8.0e6, BOTH)	;
+
+attribute	INSTRUCTION_LENGTH	of	ATMEGA16U4	: entity is	4	;
+						
+attribute	INSTRUCTION_OPCODE	of	ATMEGA16U4	: entity is		
+"	EXTEST   	(	0000	),"	&	
+"	IDCODE   	(	0001	),"	&	
+"	SAMPLE   	(	0010	),"	&	
+"	PRIVATE0 	(	1000	),"	&	
+"	PRIVATE1 	(	1001	),"	&	
+"	PRIVATE2 	(	1010	),"	&	
+"	PRIVATE3 	(	1011	),"	&	
+"	AVR_RESET	(	1100	),"	&	
+"	BYPASS   	(	1111	)"	;	
+
+attribute	INSTRUCTION_CAPTURE	of	ATMEGA16U4	: entity is "	0001	";
+						
+attribute	INSTRUCTION_PRIVATE	of	ATMEGA16U4	: entity is		
+"	PRIVATE0	,"	&			
+"	PRIVATE1	,"	&			
+"	PRIVATE2	,"	&			
+"	PRIVATE3	"	;																			
+																						
+attribute	IDCODE_REGISTER	of	ATMEGA16U4	: entity is																		
+	"0000"	&																--	0x0			
+	"1001010010001000"	&																--	0x9488			
+	"00000011111"	&																--	0x01F			
+	"1"	;																				
+
+attribute	REGISTER_ACCESS	of	ATMEGA16U4	: entity is																		
+"	BOUNDARY	(	AVR_RESET	)"	;																	
+
+attribute	BOUNDARY_LENGTH	of	ATMEGA16U4	: entity is	89	;																
+																						
+attribute	BOUNDARY_REGISTER	of	ATMEGA16U4	: entity is																		
+--	num		cell		port		func		safe		[ccell		dis		rslt]							
+"	88	(	BC_7	,	PE6	,	bidir	,	X	,	87	,	0	,	Z	),"	&	--	88	PE6.Data	E	6
+"	87	(	BC_1	,	*	,	control	,	0							),"	&	--	87	PE6.Control	E	
+"	86	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	86	not needed cell		
+"	85	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	85	not needed cell		
+"	84	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	84	not needed cell		
+"	83	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	83	not needed cell		
+"	82	(	BC_7	,	PB(0)	,	bidir	,	X	,	81	,	0	,	Z	),"	&	--	82	PB0.Data	B	0
+"	81	(	BC_1	,	*	,	control	,	0							),"	&	--	81	PB0.Control	B	
+"	80	(	BC_7	,	PB(1)	,	bidir	,	X	,	79	,	0	,	Z	),"	&	--	80	PB1.Data	B	1
+"	79	(	BC_1	,	*	,	control	,	0							),"	&	--	79	PB1.Control	B	
+"	78	(	BC_7	,	PB(2)	,	bidir	,	X	,	77	,	0	,	Z	),"	&	--	78	PB2.Data	B	2
+"	77	(	BC_1	,	*	,	control	,	0							),"	&	--	77	PB2.Control	B	
+"	76	(	BC_7	,	PB(3)	,	bidir	,	X	,	75	,	0	,	Z	),"	&	--	76	PB3.Data	B	3
+"	75	(	BC_1	,	*	,	control	,	0							),"	&	--	75	PB3.Control	B	
+"	74	(	BC_7	,	PB(4)	,	bidir	,	X	,	73	,	0	,	Z	),"	&	--	74	PB4.Data	B	4
+"	73	(	BC_1	,	*	,	control	,	0							),"	&	--	73	PB4.Control	B	
+"	72	(	BC_7	,	PB(5)	,	bidir	,	X	,	71	,	0	,	Z	),"	&	--	72	PB5.Data	B	5
+"	71	(	BC_1	,	*	,	control	,	0							),"	&	--	71	PB5.Control	B	
+"	70	(	BC_7	,	PB(6)	,	bidir	,	X	,	69	,	0	,	Z	),"	&	--	70	PB6.Data	B	6
+"	69	(	BC_1	,	*	,	control	,	0							),"	&	--	69	PB6.Control	B	
+"	68	(	BC_7	,	PB(7)	,	bidir	,	X	,	67	,	0	,	Z	),"	&	--	68	PB7.Data	B	7
+"	67	(	BC_1	,	*	,	control	,	0							),"	&	--	67	PB7.Control	B	
+"	66	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	66	not needed cell		
+"	65	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	65	not needed cell		
+"	64	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	64	not needed cell		
+"	63	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	63	not needed cell		
+"	62	(	BC_4	,	RESET	,	observe_only	,	X							),"	&	--	62	RSTT		
+"	61	(	BC_7	,	PD(0)	,	bidir	,	X	,	60	,	0	,	Z	),"	&	--	61	PD0.Data	D	0
+"	60	(	BC_1	,	*	,	control	,	0							),"	&	--	60	PD0.Control	D	
+"	59	(	BC_7	,	PD(1)	,	bidir	,	X	,	58	,	0	,	Z	),"	&	--	59	PD1.Data	D	1
+"	58	(	BC_1	,	*	,	control	,	0							),"	&	--	58	PD1.Control	D	
+"	57	(	BC_7	,	PD(2)	,	bidir	,	X	,	56	,	0	,	Z	),"	&	--	57	PD2.Data	D	2
+"	56	(	BC_1	,	*	,	control	,	0							),"	&	--	56	PD2.Control	D	
+"	55	(	BC_7	,	PD(3)	,	bidir	,	X	,	54	,	0	,	Z	),"	&	--	55	PD3.Data	D	3
+"	54	(	BC_1	,	*	,	control	,	0							),"	&	--	54	PD3.Control	D	
+"	53	(	BC_7	,	PD(4)	,	bidir	,	X	,	52	,	0	,	Z	),"	&	--	53	PD4.Data	D	4
+"	52	(	BC_1	,	*	,	control	,	0							),"	&	--	52	PD4.Control	D	
+"	51	(	BC_7	,	PD(5)	,	bidir	,	X	,	50	,	0	,	Z	),"	&	--	51	PD5.Data	D	5
+"	50	(	BC_1	,	*	,	control	,	0							),"	&	--	50	PD5.Control	D	
+"	49	(	BC_7	,	PD(6)	,	bidir	,	X	,	48	,	0	,	Z	),"	&	--	49	PD6.Data	D	6
+"	48	(	BC_1	,	*	,	control	,	0							),"	&	--	48	PD6.Control	D	
+"	47	(	BC_7	,	PD(7)	,	bidir	,	X	,	46	,	0	,	Z	),"	&	--	47	PD7.Data	D	7
+"	46	(	BC_1	,	*	,	control	,	0							),"	&	--	46	PD7.Control	D	
+"	45	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	45	not needed cell		
+"	44	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	44	not needed cell		
+"	43	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	43	not needed cell		
+"	42	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	42	not needed cell		
+"	41	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	41	not needed cell		
+"	40	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	40	not needed cell		
+"	39	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	39	not needed cell		
+"	38	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	38	not needed cell		
+"	37	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	37	not needed cell		
+"	36	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	36	not needed cell		
+"	35	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	35	not needed cell		
+"	34	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	34	not needed cell		
+"	33	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	33	not needed cell		
+"	32	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	32	not needed cell		
+"	31	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	31	not needed cell		
+"	30	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	30	not needed cell		
+"	29	(	BC_7	,	PC(6)	,	bidir	,	X	,	28	,	0	,	Z	),"	&	--	29	PC6.Data	C	6
+"	28	(	BC_1	,	*	,	control	,	0							),"	&	--	28	PC6.Control	C	
+"	27	(	BC_7	,	PC(7)	,	bidir	,	X	,	26	,	0	,	Z	),"	&	--	27	PC7.Data	C	7
+"	26	(	BC_1	,	*	,	control	,	0							),"	&	--	26	PC7.Control	C	
+"	25	(	BC_7	,	PE2	,	bidir	,	X	,	24	,	0	,	Z	),"	&	--	25	PE2.Data	E	2
+"	24	(	BC_1	,	*	,	control	,	0							),"	&	--	24	PE2.Control	E	
+"	23	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	23	not needed cell
+"	22	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	22	not needed cell
+"	21	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	21	not needed cell
+"	20	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	20	not needed cell
+"	19	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	19	not needed cell
+"	18	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	18	not needed cell
+"	17	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	17	not needed cell
+"	16	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	16	not needed cell
+"	15	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	15	not needed cell
+"	14	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	14	not needed cell
+"	13	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	13	not needed cell
+"	12	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	12	not needed cell
+"	11	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	11	not needed cell
+"	10	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	10	not needed cell
+"	9	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	9	not needed cell
+"	8	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	8	not needed cell
+"	7	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	7	not needed cell		
+"	6	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	6	not needed cell		
+"	5	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	5	not needed cell		
+"	4	(	BC_4	,	PE6	,	observe_only	,	X							),"	&	--	4	not needed cell		
+"	3	(	BC_7	,	PF(1)	,	bidir	,	X	,	2	,	0	,	Z	),"	&	--	3	PF1.Data	F	1
+"	2	(	BC_1	,	*	,	control	,	0							),"	&	--	2	PF1.Control	F	
+"	1	(	BC_7	,	PF(0)	,	bidir	,	X	,	0	,	0	,	Z	),"	&	--	1	PF0.Data	F	0
+"	0	(	BC_1	,	*	,	control	,	0							)"	;	--	0	PF0.Control	F	
+
+end	ATMEGA16U4	;																				
