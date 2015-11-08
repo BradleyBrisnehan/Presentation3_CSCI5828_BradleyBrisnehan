@@ -72,7 +72,23 @@
   <div id="section">
      <h2>Example Application</h2>
      <p>
-        
+        To fully appreciate the impact of JTAG on the micro-electronics community, let's consider an example.  Assume that the hardware team has designed a board containing an Atmel ATmega16A (Quad Flat No Lead) and a Altera Cyclone V (324 pin Ultra FineLine Ball Grid Array).  The ATmega16A is programmed in embbedded-C and the FPGA is programmed in Verilog/VHDL.  To make the example more simple, let's assume the FPGA program memory is loaded from on-board non-volatile memory at startup and that it was developed by a different company and is therefore proprietary.  The following documentation is provided to provide a more detailed investigation of the design:
+     </p>
+     <a href="../references/ATmega16A_Datasheet.pdf">ATmega16A Data Sheet</a><br>
+     <a href="../references/CycloneV_Pinout.pdf">Cyclone V Pin Out</a><br>
+     <a href="../references/megaAVR_BSDL/ATMEGA16.BSD">ATmega16A BSDL File</a><br>
+     <a href="../references/CycloneV_BSDL/5CEBA2F17.BSD">Cyclone V BSDL File</a><br>
+     <p>
+        Due to the size constraints of the hardware and the resultant chip packages used, it is impossible to probe any pins on these two devices during software development and debug phases.  In this type of application (becoming more common as ICs get smaller) the use of JTAG is crucial.
+     </p>
+     <p>
+        The hardware engineer has provided a JTAG/ISP port for you to program and debig the device.  Based on page 3 of the data sheet for the ATmega16A: the TDI pin is PC5 (port C pin 5), the TDO pin is PC4, the TCK pin is PC2, and the TMS pin is PC3.  Based on page 1 of the pin out for the Cyclone V: the TDI pin is N6 (the 14th row, 6th column on the pin grid), the TDO pin is P5, the TCK pin is L6, and the TMS pin is P6.  If these pins are used for on-board control in addition to JTAG, a series resistor is used between the on-board circuitry and the JTAG connection to avoid drive contention.  From this information, we can conclude that neither chip supports dot7 JTAG.
+     </p>
+     <p>
+        As we discussed under multi-chip topology, the TMS and TCK pins are directly connected to both the ATmega16A and the Cyclone V.  The TDI and TDO pins are connected in a chain between the two ICs.  The hardware designer has provided a 2x3 box header on the board for the software team to program the AVR and debug both devices.  You are using an <a href="http://www.atmel.com/tools/atatmel-ice.aspx">Atmel-ICE</a> along with <a href="http://www.atmel.com/tools/ATMELSTUDIO.aspx">Atmel Studio 7.0</a> to test/debug the the system.
+     </p>
+     <p>
+        ???More Here???
      </p>
   </div>
 
