@@ -83,19 +83,19 @@
      </p>
      <img src="..\images\dot1Topology.png" alt="dot1 Topology">
      <p>
-        It can be very easily seen that if a single IC is unresponsive in the chain, all devices following it will not receive test commands.  Until the single-point failure is corrected, no conclusion about the overall design or production build can be made.  In addition, this failure may be mis-construed as a failure in all remianing chips by those with little knowledge of the JTAG topology.
+        It can be very easily seen that if a single IC is unresponsive in the chain, all devices following it will not receive test commands.  Until the single-point failure is corrected, no conclusion about the overall design or production build can be made.  In addition, this failure may be mis-construed as a failure in all remaining chips by those with little knowledge of the JTAG topology.
      </p>
      <p>
-        The dot7 standard aimed to address the TAP pin coint as well as make mulit-IC testing more robust.  By implementing a two-wire interface (similar to I2C), a star-topology is possible.  The following topology is a result of the dot7 standard:
+        The dot7 standard aimed to address the TAP pin count as well as make multi-IC testing more robust.  By implementing a two-wire interface (similar to I2C), a star-topology is possible.  The following topology is a result of the dot7 standard:
      </p>
      <img src="..\images\dot7Topology.png" alt="dot7 Topology">
      <p>
-        Under this topology, an number of chips can fail and the remainder of the design can still be tested.  This facilitates easy identification of the failure and reduces the number of design/repair iterations needed to achieve a fully functional design.
+        Under this topology, a number of chips can fail and the remainder of the design can still be tested.  This facilitates easy identification of the failure and reduces the number of design/repair iterations needed to achieve a fully functional design.
      </p>
   </div>
 
   <div id="footer">
-     CSCI 5828, Fall 2015 - Presentation 2 - Bradley Brisnehan
+     CSCI 5828, Fall 2015 - Presentation 3 - Bradley Brisnehan
   </div>
 </body>
 </html>

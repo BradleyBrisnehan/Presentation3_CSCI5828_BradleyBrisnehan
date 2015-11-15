@@ -72,13 +72,13 @@
   <div id="section">
      <h2>Boundary Scan Architecture</h2>
      <p>
-        As part of standardization, the Boundary Scan Description Layer (BSDL) was defined by the Joint Test Action Group.  The modeling language defined is a subset of VHDL and is described under the dot1 standard.  This language standardizes the descriptive syntax by which the device captures, shifts, and updates scanned data.  The BSDL file is comprised of the follwoing parts:
+        As part of standardization, the Boundary Scan Description Layer (BSDL) was defined by the Joint Test Action Group.  The modeling language defined is a subset of VHDL and is described under the dot1 standard.  This language standardizes the descriptive syntax by which the device captures, shifts, and updates scanned data.  The BSDL file is comprised of the following parts:
      </p>
      <ul>
         <li><b>Entity Declaration</b> provides the device name.</li>
         <li><b>Generic Parameters</b> further defines which package on the board is described.</li>
         <li><b>Logical Port Description</b> defines the physical connections of the device including which pins are input, out, bi-directional, and which pins are boundary-scan linkage bits.</li>
-        <li><b>Package Pin Mapping</b> maps the physical connections to internal internal connections.</li>
+        <li><b>Package Pin Mapping</b> maps the physical connections to internal connections.</li>
         <li><b>Use Statements</b> connect the VHDL statements to the content mapped in the BSDL file.</li>
         <li><b>Scan Port Identification</b> identifies the exact physical connections which comprise the TAP (TDI, TDO, etc.).</li>
         <li><b>TAP Description</b> provides additional information about the TAP connection including the instruction register length, instruction opcodes, device IDCODE, etc.</li>
@@ -101,11 +101,11 @@
         Based on the content, it is apparent that this excerpt is from the Logical Port Description of the BSDL.  This excerpt identifies the RESET pin as an input, VCC as a linkage, GND as a linkage, and PA (standing for port A) as 8 pins where each pin can be configured as either input or output.
      </p>
      <p>
-        Now that we have an understanding of the boundary-scan definition, let's explore the intruction set used to perform testing.  The following boundary-scan instructions are required for every JTAG / TAP implementation.
+        Now that we have an understanding of the boundary-scan definition, let's explore the instruction set used to perform testing.  The following boundary-scan instructions are required for every JTAG / TAP implementation.
      </p>
      <ul>
         <li><b>EXTEST</b> tests the interconnection of JTAG-enabled ICs on the PCB.  This will check for shorts or poor solder joints between among all input and output pins.</li>
-        <li><b>SAMPLE/PRELOAD</b> allows data to be loaded into the boundary-scan register prior to execution of the EXTEST command.  This allows the IC to receivee a sample of the functional data under test.</li>
+        <li><b>SAMPLE/PRELOAD</b> allows data to be loaded into the boundary-scan register prior to execution of the EXTEST command.  This allows the IC to receive a sample of the functional data under test.</li>
         <li><b>BYPASS</b> removes the IC from the test loop - causing all data to pass between the TDI and TDO bits to occur without alteration.</li>
      </ul>
      <p>
@@ -114,7 +114,7 @@
   </div>
 
   <div id="footer">
-     CSCI 5828, Fall 2015 - Presentation 2 - Bradley Brisnehan
+     CSCI 5828, Fall 2015 - Presentation 3 - Bradley Brisnehan
   </div>
 </body>
 </html>

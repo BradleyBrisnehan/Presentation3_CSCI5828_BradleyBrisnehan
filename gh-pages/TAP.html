@@ -72,23 +72,23 @@
   <div id="section">
      <h2>Test Access Port</h2>
      <p>
-        The Test Access Port was originally defined under the dot1 standard to have four required and one optional pin.  These pins allow access to boundary-scan test logic rather than core internal logic.  With this in mind, most IC designers combine the ISP (In-System Programming) ports with the JTAG TAP.  THe following defines the TAP:
+        The Test Access Port was originally defined under the dot1 standard to have four required and one optional pin.  These pins allow access to boundary-scan test logic rather than core internal logic.  With this in mind, most IC designers combine the ISP (In-System Programming) ports with the JTAG TAP.  The following defines the TAP:
      </p>
      <ul>
         <li><b>Test Data In (TDI)</b> is a single-wire serial connection to the IC for input of instruction and test data.  As will be defined in clock, this pin must contain valid data at the rising edge of the test clock.</li>
         <li><b>Test Data Out (TDO)</b> is a single-wire serial connection from the IC for output of instruction and test data.  As will be defined in clock, this pin will contain valid data at the falling edge of the test clock.</li>
         <li><b>Test Mode Select (TMS)</b> is a single-wire serial connection to the IC dedicated to input of test logic control bits.  As will be defined in clock, this pin must contain valid data at the rising edge of the test clock.</li>
         <li><b>Test Clock (TCK)</b> is a dedicated clock for test communications.  Data is stored to the input buffer and mode is selected at the rising edge of the clock.  Data is stored to the output buffer at the falling edge of the clock.</li>
-        <li><b>Test Reset (TRST)</b> is a dedicated reset signal for test logic.  This pin is seperate for the reset pin often supported to reset internal core logic.</li>
+        <li><b>Test Reset (TRST)</b> is a dedicated reset signal for test logic.  This pin is separate for the reset pin often supported to reset internal core logic.</li>
      </ul>
      <p>
         The Test Reset (TRST) pin is optional under the dot1 specification.  Without this pin, JTAG can still be reset using the IC RST pin (standard on most ICs).
      </p>
      <p>
-        Under the dot7/cJTAG standard, the number of required pins was reduced.  A mandatory pin count of four was reduced to two (a clock signal and data transfer line).  This protocol is similar to I2C (prominant in embedded chip design due to the reduced pin count).  The following pins are required for dot7/cJTAG support:
+        Under the dot7/cJTAG standard, the number of required pins was reduced.  A mandatory pin count of four was reduced to two (a clock signal and data transfer line).  This protocol is similar to I2C (prominent in embedded chip design due to the reduced pin count).  The following pins are required for dot7/cJTAG support:
      </p>
      <ul>
-        <li><b>Test Serial Data (TMSC)</b> is a bidirectional open-drain line with pull-up resistors.  Devices not transmitting on the data bus should have high-impedence to avoid driving the line and creating contention.</li>
+        <li><b>Test Serial Data (TMSC)</b> is a bidirectional open-drain line with pull-up resistors.  Devices not transmitting on the data bus should have high-impedance to avoid driving the line and creating contention.</li>
         <li><b>Test Clock (TCK)</b> is a dedicated clock for test communications.  The data is written to the data line while the clock is low.  The data is read from the data line while the clock is high.</li>
      </ul>
      <p>
@@ -97,7 +97,7 @@
   </div>
 
   <div id="footer">
-     CSCI 5828, Fall 2015 - Presentation 2 - Bradley Brisnehan
+     CSCI 5828, Fall 2015 - Presentation 3 - Bradley Brisnehan
   </div>
 </body>
 </html>
